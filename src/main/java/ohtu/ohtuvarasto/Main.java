@@ -3,6 +3,8 @@ package ohtu.ohtuvarasto;
 public class Main {
 
     public static void main(String[] args) {
+        Varasto varasto = new Varasto(10);
+        System.out.println(varasto);
 
         Varasto mehua = new Varasto(100.0);
         Varasto olutta = new Varasto(100.0, 20.2);

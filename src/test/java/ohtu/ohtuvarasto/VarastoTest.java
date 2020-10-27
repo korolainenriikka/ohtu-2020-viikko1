@@ -3,10 +3,7 @@ package ohtu.ohtuvarasto;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -31,6 +28,33 @@ public class VarastoTest {
     }
 
     @Test
+    public void konstruktoriEpakelvollaTilavuudellaLuoKayttokelvottomanVaraston() {
+        Varasto epakelpo = new Varasto(-1);
+        assertEquals(0, epakelpo.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void konstruktoriKahdellaParametrillaLuoOsinTaydenVaraston() {
+        varasto = new Varasto(10, 1);
+        assertEquals(1, varasto.getSaldo(), vertailuTarkkuus);
+        assertEquals(10, varasto.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void konstruktoriEpakelvollaTilavuudellaJaSaldollaLuoKayttokelvottomanVaraston() {
+        Varasto epakelpo = new Varasto(-1, -1);
+        assertEquals(0, epakelpo.getTilavuus(), vertailuTarkkuus);
+        assertEquals(0, epakelpo.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void saldoYliTilavuudenLuoTaydenVaraston(){
+        varasto = new Varasto(10,100);
+        assertEquals(10, varasto.getTilavuus(), vertailuTarkkuus);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
     public void lisaysLisaaSaldoa() {
         varasto.lisaaVarastoon(8);
 
@@ -44,6 +68,18 @@ public class VarastoTest {
 
         // vapaata tilaa pitäisi vielä olla tilavuus-lisättävä määrä eli 2
         assertEquals(2, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void epakelpoOttaminenEiMuutaSaldoa() {
+        varasto.lisaaVarastoon(-1);
+        assertEquals(10, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void lisataanEnemmanKuinMahtuuTayttaaVaraston() {
+        varasto.lisaaVarastoon(100);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
     }
 
     @Test
@@ -63,6 +99,25 @@ public class VarastoTest {
 
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void epakelpoVarastostaOttoEiMuutaVarastoa() {
+        varasto.lisaaVarastoon(8);
+        varasto.otaVarastosta(-1);
+        assertEquals(8, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void otataanYliSaldonPalauttaaKokoSaldon() {
+        varasto.lisaaVarastoon(8);
+        assertEquals(8, varasto.otaVarastosta(18), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void merkkijonoEsitysKuvaaTilanOikein() {
+        System.out.println(varasto.toString());
+        assertEquals("saldo = 0.0, vielä tilaa 10.0", varasto.toString());
     }
 
 }
