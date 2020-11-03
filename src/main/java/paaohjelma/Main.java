@@ -5,7 +5,7 @@ import ohtu.ohtuvarasto.Varasto;
 public class Main {
 
     public static void main(String[] args) {
-        Varasto varasto = new Varasto(10);
+       /* Varasto varasto = new Varasto(10);
         System.out.println(varasto);
 
         Varasto mehua = new Varasto(100.0);
@@ -57,6 +57,6 @@ public class Main {
         System.out.println("mehua.otaVarastosta(-32.9)");
         saatiin = mehua.otaVarastosta(-32.9);
         System.out.println("saatiin " + saatiin);
-        System.out.println("Mehuvarasto: " + mehua);
+        System.out.println("Mehuvarasto: " + mehua);*/
     }
 }
